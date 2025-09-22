@@ -13,10 +13,10 @@ router=APIRouter(
 )
 
 @router.get("/",response_model=list[scheme.PostResponce])
-def root(db:Session = Depends(get_db),limit: int= 10,skip: int= 0,search:Optional[str]=""):
+def root(db:Session = Depends(get_db)):
     # cursor.execute("""SELECT * FROM posts""")
     # posts= cursor.fetchall()
-    posts=db.query(models.Post).filter(models.Post.title.contains(search).limit(limit).offset(skip)).all()
+    posts=db.query(models.Post).all()
     return posts
 
 @router.post("/",status_code=status.HTTP_201_CREATED,response_model=scheme.PostResponce)

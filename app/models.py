@@ -1,3 +1,4 @@
+from email.mime import base
 from typing import Text
 from sqlalchemy.orm import relationship
 from sqlalchemy import TIMESTAMP, Column, ForeignKey,Integer,String,Boolean,Update,Delete
@@ -25,3 +26,10 @@ class User(Base):
     password=Column(String, nullable=False)
     created_at=Column(TIMESTAMP(timezone=True),nullable= False,server_default=Text('now()'))   
 
+
+
+class Vote(Base):
+    __tablename__="Votes"
+
+    post_id=Column(Integer,ForeignKey("posts.id",ondelete= "CASCADE"),primary_key=True)
+    user_id=Column(Integer,ForeignKey("Users.id",ondelete= "CASCADE"),primary_key=True)

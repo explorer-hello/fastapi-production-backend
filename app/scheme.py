@@ -2,7 +2,7 @@ import email_validator
 from pydantic import BaseModel, EmailStr
 from datetime import datetime
 from typing import Optional
-
+from pydantic import conint
 
 class UserOut(BaseModel):
     id:int
@@ -50,4 +50,9 @@ class Token(BaseModel):
 
 class Token_data(BaseModel):
     id:Optional[str]=None
+
+
+class Vote(BaseModel):
+    post_id: int
+    dir:conint(le=1)  #type:ignore
 
