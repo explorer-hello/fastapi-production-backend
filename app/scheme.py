@@ -28,9 +28,15 @@ class PostResponce(PostBase):
     created_at:datetime
     owner_id:int
     owner: UserOut
-
     class Config:
         orm_mode= True
+
+class PostOut(BaseModel):
+    Post: PostResponce
+    votes : int
+    class Config:
+        orm_mode= True
+
 
 class CreateUSer(BaseModel):
     email:EmailStr
